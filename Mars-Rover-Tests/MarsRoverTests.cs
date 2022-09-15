@@ -12,8 +12,6 @@ public class Tests
     [SetUp]
     public void Setup()
     {
-        //plateau = new Plateau(5, 5);
-        //rover1 = new Rover(plateau);
     }
 
     [Test]
@@ -28,13 +26,26 @@ public class Tests
     }
 
     [Test]
-    public void Given_A_Rover_It_Is_Placed_In_A_Invalid_Position_On_The_Plateau()
+    public void Plateau_Throws_Exception_If_Construction_Has_Negative_Values()
     {
         var ex = Assert.Throws<ArgumentException>(() => plateau = new Plateau(-1, 3));
         Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with negative values."));
 
         ex = Assert.Throws<ArgumentException>(() => plateau = new Plateau(1, -1));
         Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with negative values."));
+    }
 
+    [Test]
+    public void Position_Throws_Exception_If_Construction_Has_Invalid_Values()
+    {
+        Position position;
+        var ex = Assert.Throws<ArgumentException>(() => position = new Position(-1, 2, 'N'));
+        Assert.That(ex.Message, Is.EqualTo("Position can not have negative values or invalid direction."));
+
+        ex = Assert.Throws<ArgumentException>(() => position = new Position(1, -1, 'E'));
+        Assert.That(ex.Message, Is.EqualTo("Position can not have negative values or invalid direction."));
+
+        ex = Assert.Throws<ArgumentException>(() => position = new Position(1, 1, 'P'));
+        Assert.That(ex.Message, Is.EqualTo("Position can not have negative values or invalid direction."));
     }
 }
