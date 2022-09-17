@@ -3,8 +3,8 @@ namespace MarsRover.Model
 {
     public class Plateau
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
 
         public Plateau(int x, int y)
         {
@@ -12,8 +12,8 @@ namespace MarsRover.Model
             {
                 throw new ArgumentException("Plateau can not be created with negative values.");
             }
-            X = x;
-            Y = y;
+            Width = x;
+            Height = y;
         }
     }
 }

@@ -20,8 +20,19 @@ public class Tests
         plateau1 = new Plateau(5, 5);
         rover1 = new Rover(plateau1);
         rover1.PlaceRoverOnPlateau(new Position(1, 2, 'N'));
-        rover1.CurrentPosition.X.Should().Be(1);
-        rover1.CurrentPosition.Y.Should().Be(2);
+        rover1.CurrentPosition.XPosition.Should().Be(1);
+        rover1.CurrentPosition.YPosition.Should().Be(2);
+        rover1.CurrentPosition.Direction.Should().Be('N');
+    }
+
+    [Test]
+    public void Given_A_Rover_It_Is_Placed_In_A_Valid_Position_On_The_Plateau_2()
+    {
+        plateau1 = new Plateau(10, 10);
+        rover1 = new Rover(plateau1);
+        rover1.PlaceRoverOnPlateau(new Position(6, 7, 'N'));
+        rover1.CurrentPosition.XPosition.Should().Be(6);
+        rover1.CurrentPosition.YPosition.Should().Be(7);
         rover1.CurrentPosition.Direction.Should().Be('N');
     }
 
@@ -63,18 +74,7 @@ public class Tests
     {
         plateau1 = new Plateau(2, 2);
         rover1 = new Rover(plateau1);
-        var ex = Assert.Throws<ArgumentException>(() => rover1.PlaceRoverOnPlateau(new Position(3, 3, 'E')));
+        var ex = Assert.Throws<ArgumentException>(() => rover1.PlaceRoverOnPlateau(new Position(3, 3, 'W')));
         Assert.That(ex.Message, Is.EqualTo("Rover can not be placed outside the Plateau dimension."));
-    }
-
-    [Test]
-    public void Given_A_Rover_It_Should_Throw_An_Exception_If_The_Position_For_Plateau_Is_Invalid_3()
-    {
-        plateau1 = new Plateau(10, 10);
-        rover1 = new Rover(plateau1);
-        rover1.PlaceRoverOnPlateau(new Position(6, 7, 'N'));
-        rover1.CurrentPosition.X.Should().Be(6);
-        rover1.CurrentPosition.Y.Should().Be(7);
-        rover1.CurrentPosition.Direction.Should().Be('N');
     }
 }
