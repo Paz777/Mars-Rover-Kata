@@ -61,7 +61,7 @@ public class Tests
     }
 
     [Test]
-    public void Given_A_Rover_It_Should_Throw_An_Exception_If_The_Position_For_Plateau_Is_Invalid()
+    public void Given_A_Rover_It_Should_Throw_An_Exception_If_The_Position_Is_Outside_The_Plateau()
     {
         plateau1 = new Plateau(4, 4);
         rover1 = new Rover(plateau1);
@@ -70,11 +70,57 @@ public class Tests
     }
 
     [Test]
-    public void Given_A_Rover_It_Should_Throw_An_Exception_If_The_Position_For_Plateau_Is_Invalid_2()
+    public void Given_A_Rover_It_Should_Throw_An_Exception_If_The_Position_Is_Outside_The_Plateau_2()
     {
         plateau1 = new Plateau(2, 2);
         rover1 = new Rover(plateau1);
         var ex = Assert.Throws<ArgumentException>(() => rover1.PlaceRoverOnPlateau(new Position(3, 3, 'W')));
         Assert.That(ex.Message, Is.EqualTo("Rover can not be placed outside the Plateau dimension."));
     }
+
+    [Test]
+    public void When_Rover_Is_To_Spin_Right_And_Not_On_Plateau_It_Should_Throw_Exception()
+    {
+        rover1 = new Rover(new Plateau(5, 5));
+        var ex = Assert.Throws<NullReferenceException>(() => rover1.SpinRight());
+        Assert.That(ex.Message, Is.EqualTo("Rover has not been placed on the Plateau."));
+    }
+
+    [Test]
+    public void When_Rover_Is_Facing_North_And_Instructed_To_Spin_Right_It_Should_Face_East()
+    {
+        rover1 = new Rover(new Plateau(5, 5));
+        rover1.PlaceRoverOnPlateau(new Position(1, 2, 'N'));
+        rover1.SpinRight();
+        rover1.CurrentPosition.Direction.Should().Be('E');
+    }
+
+    [Test]
+    public void When_Rover_Is_Facing_East_And_Instructed_To_Spin_Right_It_Should_Face_South()
+    {
+        rover1 = new Rover(new Plateau(5, 5));
+        rover1.PlaceRoverOnPlateau(new Position(1, 2, 'E'));
+        rover1.SpinRight();
+        rover1.CurrentPosition.Direction.Should().Be('S');
+    }
+
+    [Test]
+    public void When_Rover_Is_Facing_South_And_Instructed_To_Spin_Right_It_Should_Face_West()
+    {
+        rover1 = new Rover(new Plateau(5, 5));
+        rover1.PlaceRoverOnPlateau(new Position(1, 2, 'S'));
+        rover1.SpinRight();
+        rover1.CurrentPosition.Direction.Should().Be('W');
+    }
+
+    [Test]
+    public void When_Rover_Is_Facing_West_And_Instructed_To_Spin_Right_It_Should_Face_North()
+    {
+        rover1 = new Rover(new Plateau(5, 5));
+        rover1.PlaceRoverOnPlateau(new Position(1, 2, 'W'));
+        rover1.SpinRight();
+        rover1.CurrentPosition.Direction.Should().Be('N');
+    }
+
+
 }
