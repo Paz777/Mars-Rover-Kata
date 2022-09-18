@@ -8,6 +8,7 @@ namespace MarsRover.Model
         public int XPosition {get; private set;}
         public int YPosition { get; private set; }
         public char Direction { get; set; }
+
         private int minXPosition = 0;
         private int minYPosition = 0;
 

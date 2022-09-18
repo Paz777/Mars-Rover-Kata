@@ -25,10 +25,7 @@ namespace MarsRover.Model
 
         public void SpinRight()
         {
-            if (CurrentPosition is null)
-            {
-                throw new NullReferenceException("Rover has not been placed on the Plateau.");
-            }
+            CheckPositionIsNull();
             CurrentPosition.Direction = CurrentPosition.Direction switch
             {
                 'N' => 'E',
@@ -36,6 +33,26 @@ namespace MarsRover.Model
                 'S' => 'W',
                 'W' => 'N'
             };
+        }
+
+        public void SpinLeft()
+        {
+            CheckPositionIsNull();
+            CurrentPosition.Direction = CurrentPosition.Direction switch
+            {
+                'N' => 'W',
+                'W' => 'S',
+                'S' => 'E',
+                'E' => 'N'
+            };
+        }
+
+        private void CheckPositionIsNull()
+        {
+            if (CurrentPosition is null)
+            {
+                throw new NullReferenceException("Rover has not been placed on the Plateau.");
+            }
         }
     }
 }
