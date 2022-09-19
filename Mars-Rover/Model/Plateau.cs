@@ -6,14 +6,16 @@ namespace MarsRover.Model
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        public Plateau(int x, int y)
+        private int minPlateauVal = 0;
+
+        public Plateau(int width, int height)
         {
-            if (x < 0 || y < 0)
+            if (width < minPlateauVal || height < minPlateauVal)
             {
                 throw new ArgumentException("Plateau can not be created with negative values.");
             }
-            Width = x;
-            Height = y;
+            Width = width;
+            Height = height;
         }
     }
 }

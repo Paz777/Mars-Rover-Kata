@@ -47,6 +47,18 @@ namespace MarsRover.Model
             };
         }
 
+        public void Move()
+        {
+            CheckPositionIsNull();
+            var what_is_this_variable_for = CurrentPosition.Direction switch
+            {
+                'N' => CurrentPosition.YPosition += 1,
+                'E' => CurrentPosition.XPosition += 1,
+                'S' => CurrentPosition.YPosition -= 1,
+                'W' => CurrentPosition.XPosition -= 1
+            };
+        }
+
         private void CheckPositionIsNull()
         {
             if (CurrentPosition is null)

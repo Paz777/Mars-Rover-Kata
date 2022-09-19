@@ -165,4 +165,56 @@ public class Tests
         rover1.SpinLeft();
         rover1.CurrentPosition.Direction.Should().Be('N');
     }
+
+    [Test]
+    public void When_Rover_Is_To_Move_And_Not_On_Plateau_It_Should_Throw_Exception()
+    {
+        rover1 = new Rover(new Plateau(5, 5));
+        var ex = Assert.Throws<NullReferenceException>(() => rover1.Move());
+        Assert.That(ex.Message, Is.EqualTo("Rover has not been placed on the Plateau."));
+    }
+
+    [Test]
+    public void When_Rover_Is_Facing_North_And_Instructed_To_Move_It_Should_Move_1_Grid_Position()
+    {
+        rover1 = new Rover(new Plateau(5, 5));
+        rover1.PlaceRoverOnPlateau(new Position(1, 2, 'N'));
+        rover1.Move();
+        rover1.CurrentPosition.XPosition.Should().Be(1);
+        rover1.CurrentPosition.YPosition.Should().Be(3);
+        rover1.CurrentPosition.Direction.Should().Be('N');
+    }
+
+    [Test]
+    public void When_Rover_Is_Facing_East_And_Instructed_To_Move_It_Should_Move_1_Grid_Position()
+    {
+        rover1 = new Rover(new Plateau(5, 5));
+        rover1.PlaceRoverOnPlateau(new Position(1, 2, 'E'));
+        rover1.Move();
+        rover1.CurrentPosition.XPosition.Should().Be(2);
+        rover1.CurrentPosition.YPosition.Should().Be(2);
+        rover1.CurrentPosition.Direction.Should().Be('E');
+    }
+
+    [Test]
+    public void When_Rover_Is_Facing_South_And_Instructed_To_Move_It_Should_Move_1_Grid_Position()
+    {
+        rover1 = new Rover(new Plateau(5, 5));
+        rover1.PlaceRoverOnPlateau(new Position(1, 2, 'S'));
+        rover1.Move();
+        rover1.CurrentPosition.XPosition.Should().Be(1);
+        rover1.CurrentPosition.YPosition.Should().Be(1);
+        rover1.CurrentPosition.Direction.Should().Be('S');
+    }
+
+    [Test]
+    public void When_Rover_Is_Facing_West_And_Instructed_To_Move_It_Should_Move_1_Grid_Position()
+    {
+        rover1 = new Rover(new Plateau(5, 5));
+        rover1.PlaceRoverOnPlateau(new Position(1, 2, 'W'));
+        rover1.Move();
+        rover1.CurrentPosition.XPosition.Should().Be(0);
+        rover1.CurrentPosition.YPosition.Should().Be(2);
+        rover1.CurrentPosition.Direction.Should().Be('W');
+    }
 }

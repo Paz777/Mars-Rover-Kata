@@ -5,18 +5,17 @@ namespace MarsRover.Model
 {
     public class Position
     {
-        public int XPosition {get; private set;}
-        public int YPosition { get; private set; }
+        public int XPosition {get; set;}
+        public int YPosition { get; set; }
         public char Direction { get; set; }
 
-        private int minXPosition = 0;
-        private int minYPosition = 0;
+        private int minPosition = 0;
 
         private const string directionRegEx = "N|E|S|W";
 
         public Position(int xPosition, int yPosition, char direction)
         {
-            if (xPosition < minXPosition || yPosition < minYPosition || !Regex.IsMatch(direction.ToString(), directionRegEx))
+            if (xPosition < minPosition || yPosition < minPosition || !Regex.IsMatch(direction.ToString(), directionRegEx))
             {
                 throw new ArgumentException("Position can not have negative values or invalid direction.");
             }
