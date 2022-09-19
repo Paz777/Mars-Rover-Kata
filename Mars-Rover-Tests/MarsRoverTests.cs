@@ -217,4 +217,16 @@ public class Tests
         rover1.CurrentPosition.YPosition.Should().Be(2);
         rover1.CurrentPosition.Direction.Should().Be('W');
     }
+
+    [TestCase("5 5", 5, 5)]
+    [TestCase("0 0", 0, 0)]
+    [TestCase("15 6", 15, 6)]
+    [TestCase(" 1 4 ", 1, 4)]
+    public void Set_A_Plateau_From_A_String_Input(string input, int plateauWidth, int plateauHeight)
+    {
+        MissionControl missionControl1 = new MissionControl();
+        missionControl1.AddPlateau(input);
+        missionControl1.GetPlateauWidth.Should().Be(plateauWidth);
+        missionControl1.GetPlateauHeight.Should().Be(plateauHeight);
+    }
 }
