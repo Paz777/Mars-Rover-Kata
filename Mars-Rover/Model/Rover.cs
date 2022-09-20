@@ -3,12 +3,10 @@ namespace MarsRover.Model
 {
     public class Rover
     {
-        private Plateau plateau;
         public Position CurrentPosition { get; private set; }
 
-        public Rover(Plateau plateau)
+        public Rover()
         {
-            this.plateau = plateau;
         }
 
         public void PlaceRoverOnPlateau(Position position)
