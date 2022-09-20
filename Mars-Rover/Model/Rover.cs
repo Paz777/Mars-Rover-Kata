@@ -13,14 +13,7 @@ namespace MarsRover.Model
 
         public void PlaceRoverOnPlateau(Position position)
         {
-            if ((position.XPosition > plateau.Width) || (position.YPosition > plateau.Height))
-            {
-                throw new ArgumentException("Rover can not be placed outside the Plateau dimension.");
-            }
-            else
-            {
-                CurrentPosition = position;
-            }
+            CurrentPosition = position;
         }
 
         public void SpinRight()

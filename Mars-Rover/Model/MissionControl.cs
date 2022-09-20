@@ -36,6 +36,10 @@ namespace MarsRover.Model
             {
                 throw new ArgumentException("Position can not have negative values or invalid direction.");
             }
+            if (Convert.ToInt32(roverPosition[0]) > plateau.Width || Convert.ToInt32(roverPosition[1]) > plateau.Height)
+            {
+                throw new ArgumentException("Rover can not be placed outside the Plateau dimension.");
+            }
             rover = new Rover(plateau);
             rover.PlaceRoverOnPlateau(new Position(Convert.ToInt32(roverPosition[0]),
                 Convert.ToInt32(roverPosition[1]), Convert.ToChar(roverPosition[2])));

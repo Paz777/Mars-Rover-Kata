@@ -37,24 +37,6 @@ public class Tests
     }
 
     [Test]
-    public void Given_A_Rover_It_Should_Throw_An_Exception_If_The_Position_Is_Outside_The_Plateau()
-    {
-        plateau1 = new Plateau(4, 4);
-        rover1 = new Rover(plateau1);
-        var ex = Assert.Throws<ArgumentException>(() => rover1.PlaceRoverOnPlateau(new Position(6, 6, 'E')));
-        Assert.That(ex.Message, Is.EqualTo("Rover can not be placed outside the Plateau dimension."));
-    }
-
-    [Test]
-    public void Given_A_Rover_It_Should_Throw_An_Exception_If_The_Position_Is_Outside_The_Plateau_2()
-    {
-        plateau1 = new Plateau(2, 2);
-        rover1 = new Rover(plateau1);
-        var ex = Assert.Throws<ArgumentException>(() => rover1.PlaceRoverOnPlateau(new Position(3, 3, 'W')));
-        Assert.That(ex.Message, Is.EqualTo("Rover can not be placed outside the Plateau dimension."));
-    }
-
-    [Test]
     public void When_Rover_Is_To_Spin_Right_And_Not_On_Plateau_It_Should_Throw_Exception()
     {
         rover1 = new Rover(new Plateau(5, 5));
@@ -237,5 +219,16 @@ public class Tests
         missionControl1.AddPlateau("5 5");
         var ex = Assert.Throws<ArgumentException>(() => missionControl1.AddRover(input));
         Assert.That(ex.Message, Is.EqualTo("Position can not have negative values or invalid direction."));
+    }
+
+    [TestCase("6 5 N")]
+    [TestCase("5 6 E")]
+    [TestCase("6 6 W")]
+    public void When_A_Rover_Is_Placed_Outside_The_Plateau_From_A_String_Input_An_Exception_Is_Thrown(string input)
+    {
+        MissionControl missionControl1 = new MissionControl();
+        missionControl1.AddPlateau("5 5");
+        var ex = Assert.Throws<ArgumentException>(() => missionControl1.AddRover(input));
+        Assert.That(ex.Message, Is.EqualTo("Rover can not be placed outside the Plateau dimension."));
     }
 }
