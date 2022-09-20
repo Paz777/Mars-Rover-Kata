@@ -240,4 +240,15 @@ public class Tests
         var ex = Assert.Throws<ArgumentException>(() => missionControl1.AddPlateau(input));
         Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with negative values."));
     }
+
+    [TestCase("1 2 N", 1, 2, 'N')]
+    public void Place_A_Rover_On_A_Plateau_From_A_String_Input(string input, int xPos, int yPos, char direction)
+    {
+        MissionControl missionControl1 = new MissionControl();
+        missionControl1.AddPlateau("5 5");
+        missionControl1.AddRover(input);
+        missionControl1.GetRoverPosition.XPosition.Should().Be(xPos);
+        missionControl1.GetRoverPosition.YPosition.Should().Be(yPos);
+        missionControl1.GetRoverPosition.Direction.Should().Be(direction);
+    }
 }
