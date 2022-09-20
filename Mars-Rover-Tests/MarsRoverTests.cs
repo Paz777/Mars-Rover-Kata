@@ -37,20 +37,6 @@ public class Tests
     }
 
     [Test]
-    public void Position_Throws_Exception_If_Construction_Has_Invalid_Values()
-    {
-        Position position;
-        var ex = Assert.Throws<ArgumentException>(() => position = new Position(-1, 2, 'N'));
-        Assert.That(ex.Message, Is.EqualTo("Position can not have negative values or invalid direction."));
-
-        ex = Assert.Throws<ArgumentException>(() => position = new Position(1, -1, 'E'));
-        Assert.That(ex.Message, Is.EqualTo("Position can not have negative values or invalid direction."));
-
-        ex = Assert.Throws<ArgumentException>(() => position = new Position(1, 1, 'P'));
-        Assert.That(ex.Message, Is.EqualTo("Position can not have negative values or invalid direction."));
-    }
-
-    [Test]
     public void Given_A_Rover_It_Should_Throw_An_Exception_If_The_Position_Is_Outside_The_Plateau()
     {
         plateau1 = new Plateau(4, 4);
@@ -238,5 +224,16 @@ public class Tests
         missionControl1.GetRoverPosition.XPosition.Should().Be(xPos);
         missionControl1.GetRoverPosition.YPosition.Should().Be(yPos);
         missionControl1.GetRoverPosition.Direction.Should().Be(direction);
+    }
+
+    [TestCase("-1 2 N")]
+    [TestCase("1 -2 E")]
+    [TestCase("1 2 P")]
+    public void Place_A_Rover_On_A_Plateau_From_A_String_Input(string input)
+    {
+        MissionControl missionControl1 = new MissionControl();
+        missionControl1.AddPlateau("5 5");
+        var ex = Assert.Throws<ArgumentException>(() => missionControl1.AddRover(input));
+        Assert.That(ex.Message, Is.EqualTo("Position can not have negative values or invalid direction."));
     }
 }
