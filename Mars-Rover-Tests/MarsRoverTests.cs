@@ -208,7 +208,7 @@ public class Tests
 
     [TestCase("-1 5")]
     [TestCase("3 -1")]
-    public void A_Plateau_Is_Set_With_Invalid_Dimensions_From_String_Input(string input)
+    public void When_A_Plateau_Has_Invalid_String_Input_An_Exception_Is_Thrown(string input)
     {
         MissionControl missionControl1 = new MissionControl();
         var ex = Assert.Throws<ArgumentException>(() => missionControl1.AddPlateau(input));
@@ -216,6 +216,8 @@ public class Tests
     }
 
     [TestCase("1 2 N", 1, 2, 'N')]
+    [TestCase("2 4 E", 2, 4, 'E')]
+    [TestCase(" 3 3 W ", 3, 3, 'W')]
     public void Place_A_Rover_On_A_Plateau_From_A_String_Input(string input, int xPos, int yPos, char direction)
     {
         MissionControl missionControl1 = new MissionControl();
@@ -229,7 +231,7 @@ public class Tests
     [TestCase("-1 2 N")]
     [TestCase("1 -2 E")]
     [TestCase("1 2 P")]
-    public void Place_A_Rover_On_A_Plateau_From_A_String_Input(string input)
+    public void When_A_Rover_Is_Placed_On_A_Plateau_With_Invalid_String_Input_An_Exception_Is_Thrown(string input)
     {
         MissionControl missionControl1 = new MissionControl();
         missionControl1.AddPlateau("5 5");

@@ -5,9 +5,9 @@ namespace MarsRover.Model
 {
     public class Position
     {
-        public int XPosition {get; set;}
-        public int YPosition { get; set; }
-        public char Direction { get; set; }
+        public int XPosition;
+        public int YPosition;
+        public char Direction;
 
         public Position(int xPosition, int yPosition, char direction)
         {
