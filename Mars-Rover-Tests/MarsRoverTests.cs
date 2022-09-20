@@ -229,4 +229,15 @@ public class Tests
         missionControl1.GetPlateauWidth.Should().Be(plateauWidth);
         missionControl1.GetPlateauHeight.Should().Be(plateauHeight);
     }
+
+    [TestCase("-1 5", Ignore = "Code to be completed where should the exception be thrown.")]
+    [TestCase("3 -1", Ignore = "Should it be in the construction of plateau or in mission control.")]
+    public void A_Plateau_Is_Set_With_Invalid_Dimensions_From_String_Input(string input)
+    {
+        MissionControl missionControl1 = new MissionControl();
+        missionControl1.AddPlateau(input);
+
+        var ex = Assert.Throws<ArgumentException>(() => missionControl1.AddPlateau(input));
+        Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with negative values."));
+    }
 }
