@@ -3,20 +3,25 @@ namespace MarsRover.Model
 {
     public class MissionControl
     {
+        public int GetPlateauWidth { get => plateau.Width; }
+        public int GetPlateauHeight { get => plateau.Height; }
+        public Position GetRoverPosition { get => rover.CurrentPosition; }
+
         private Plateau plateau;
         private Rover rover;
+        private int minPlateauVal = 0;
 
         public MissionControl()
         {
         }
 
-        public int GetPlateauWidth { get => plateau.Width; }
-        public int GetPlateauHeight { get => plateau.Height; }
-        public Position GetRoverPosition { get => rover.CurrentPosition;}
-
         public void AddPlateau(string input)
         {
             var dimensions = Array.ConvertAll(input.Trim().Split(" "), x => Convert.ToInt32(x));
+            if (dimensions[0] < minPlateauVal || dimensions[1] < minPlateauVal)
+            {
+                throw new ArgumentException("Plateau can not be created with negative values.");
+            }
             plateau = new Plateau(dimensions[0], dimensions[1]);
         }
 

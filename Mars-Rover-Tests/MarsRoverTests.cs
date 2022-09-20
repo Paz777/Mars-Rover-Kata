@@ -37,16 +37,6 @@ public class Tests
     }
 
     [Test]
-    public void Plateau_Throws_Exception_If_Construction_Has_Negative_Values()
-    {
-        var ex = Assert.Throws<ArgumentException>(() => plateau1 = new Plateau(-1, 3));
-        Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with negative values."));
-
-        ex = Assert.Throws<ArgumentException>(() => plateau1 = new Plateau(1, -1));
-        Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with negative values."));
-    }
-
-    [Test]
     public void Position_Throws_Exception_If_Construction_Has_Invalid_Values()
     {
         Position position;
@@ -230,13 +220,11 @@ public class Tests
         missionControl1.GetPlateauHeight.Should().Be(plateauHeight);
     }
 
-    [TestCase("-1 5", Ignore = "Code to be completed where should the exception be thrown.")]
-    [TestCase("3 -1", Ignore = "Should it be in the construction of plateau or in mission control.")]
+    [TestCase("-1 5")]
+    [TestCase("3 -1")]
     public void A_Plateau_Is_Set_With_Invalid_Dimensions_From_String_Input(string input)
     {
         MissionControl missionControl1 = new MissionControl();
-        missionControl1.AddPlateau(input);
-
         var ex = Assert.Throws<ArgumentException>(() => missionControl1.AddPlateau(input));
         Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with negative values."));
     }
