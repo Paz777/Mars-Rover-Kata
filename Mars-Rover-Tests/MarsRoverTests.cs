@@ -200,7 +200,7 @@ public class Tests
     [TestCase("1 2 N", 1, 2, 'N')]
     [TestCase("2 4 E", 2, 4, 'E')]
     [TestCase(" 3 3 W ", 3, 3, 'W')]
-    public void Place_A_Rover_On_A_Plateau_From_A_String_Input(string input, int xPos, int yPos, char direction)
+    public void Given_A_Rover_Place_It_On_A_Plateau(string input, int xPos, int yPos, char direction)
     {
         MissionControl missionControl1 = new MissionControl();
         missionControl1.AddPlateau("5 5");
@@ -213,7 +213,7 @@ public class Tests
     [TestCase("-1 2 N")]
     [TestCase("1 -2 E")]
     [TestCase("1 2 P")]
-    public void When_A_Rover_Is_Placed_On_A_Plateau_With_Invalid_String_Input_An_Exception_Is_Thrown(string input)
+    public void When_A_Rover_Is_Placed_On_A_Plateau_An_Exception_Is_Thrown(string input)
     {
         MissionControl missionControl1 = new MissionControl();
         missionControl1.AddPlateau("5 5");
@@ -224,11 +224,72 @@ public class Tests
     [TestCase("6 5 N")]
     [TestCase("5 6 E")]
     [TestCase("6 6 W")]
-    public void When_A_Rover_Is_Placed_Outside_The_Plateau_From_A_String_Input_An_Exception_Is_Thrown(string input)
+    public void When_A_Rover_Is_Placed_Outside_The_Plateau_An_Exception_Is_Thrown(string input)
     {
         MissionControl missionControl1 = new MissionControl();
         missionControl1.AddPlateau("5 5");
         var ex = Assert.Throws<ArgumentException>(() => missionControl1.AddRover(input));
         Assert.That(ex.Message, Is.EqualTo("Rover can not be placed outside the Plateau dimension."));
+    }
+
+    [TestCase("LMLMLMLMM","1 2 N", 1, 3, 'N')]
+    [TestCase("MMRMMRMRRM", "3 3 E" , 5, 1, 'E')]
+    public void Given_A_Rover_With_Move_Instructions_It_Should_Be_In_Correct_Position(string moveInput, string roverInput,
+        int xPos, int yPos, char direction)
+    {
+        MissionControl missionControl = new MissionControl();
+        missionControl.AddPlateau("5 5");
+        missionControl.AddRover(roverInput);
+        missionControl.MoveRover(moveInput);
+        missionControl.GetRoverPosition.XPosition.Should().Be(xPos);
+        missionControl.GetRoverPosition.YPosition.Should().Be(yPos);
+        missionControl.GetRoverPosition.Direction.Should().Be(direction);
+    }
+
+    [Test]
+    public void Given_A_Rover_With_An_Invalid_Move_It_Should_Throw_An_Exception()
+    {
+        MissionControl missionControl = new MissionControl();
+        missionControl.AddPlateau("5 5");
+        missionControl.AddRover("3 3 E");
+        var ex = Assert.Throws<ArgumentException>(() => missionControl.MoveRover("MMRMMPRMRRM"));
+        Assert.That(ex.Message, Is.EqualTo("Not a valid movement move aborted."));
+    }
+
+    [Test]
+    public void Given_A_Rover_With_An_Invalid_Move_Rover_Should_Remain_In_Correct_Position()
+    {
+        MissionControl missionControl = new MissionControl();
+        missionControl.AddPlateau("5 5");
+        missionControl.AddRover("3 3 E");
+        try
+        {
+            missionControl.MoveRover("MMRMMPPPPRMRRM");
+        }
+        catch (Exception ex) 
+        {
+        }
+        missionControl.GetRoverPosition.XPosition.Should().Be(3);
+        missionControl.GetRoverPosition.YPosition.Should().Be(3);
+        missionControl.GetRoverPosition.Direction.Should().Be('E');
+    }
+
+    [Test]
+    public void Given_A_Rover_With_A_Valid_Move_Then_An_Invalid_Move_Rover_Should_Remain_In_Correct_Position()
+    {
+        MissionControl missionControl = new MissionControl();
+        missionControl.AddPlateau("5 5");
+        missionControl.AddRover("1 2 N");
+        missionControl.MoveRover("LMLMLMLMM");
+        try
+        {
+            missionControl.MoveRover("MMRMMPRMRRM");
+        }
+        catch (Exception ex)
+        {
+        }
+        missionControl.GetRoverPosition.XPosition.Should().Be(1);
+        missionControl.GetRoverPosition.YPosition.Should().Be(3);
+        missionControl.GetRoverPosition.Direction.Should().Be('N');
     }
 }

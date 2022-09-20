@@ -13,6 +13,7 @@ namespace MarsRover.Model
         private Rover rover;
         private int minimumLowerBoundary = 0;
         private const string directionRegEx = "N|E|S|W";
+        private const string movementRegEx = "^[LRM]*$";
 
         public MissionControl()
         {
@@ -44,6 +45,29 @@ namespace MarsRover.Model
             rover.PlaceRoverOnPlateau(new Position(Convert.ToInt32(roverPosition[0]),
                 Convert.ToInt32(roverPosition[1]), Convert.ToChar(roverPosition[2])));
         }
+
+        public void MoveRover(string movement)
+        {
+            if (!Regex.IsMatch(movement, movementRegEx))
+            {
+                throw new ArgumentException("Not a valid movement move aborted.");
+            }
+            char[] moveInstructions = movement.ToCharArray();
+            foreach (char move in moveInstructions)
+            {
+                if (move == 'L')
+                {
+                    rover.SpinLeft();
+                }
+                else if (move == 'R')
+                {
+                    rover.SpinRight();
+                }
+                else if (move  == 'M')
+                {
+                    rover.Move();
+                }
+            }
+        }
     }
 }
-
