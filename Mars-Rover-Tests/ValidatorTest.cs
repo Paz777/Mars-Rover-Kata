@@ -22,4 +22,22 @@ public class ValidatorTest
         var ex = Assert.Throws<ArgumentException>(() => validator.ValidatePosition(roverPositionInput));
         Assert.That(ex.Message, Is.EqualTo("Position can not have negative values or invalid direction."));
     }
+
+    [TestCase("-1 5")]
+    [TestCase("3 -1")]
+    public void Given_A_String_Input_With_An_Invalid_Plateau_Validator_Should_Throw_Exception(string plateauInput)
+    {
+        var ex = Assert.Throws<ArgumentException>(() => validator.ValidatePlateau(plateauInput));
+        Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with negative values."));
+    }
+
+    [TestCase("6 5 N")]
+    [TestCase("5 6 E")]
+    [TestCase("6 6 W")]
+    public void Given_A_String_Input_For_A_Rover_Which_Is_Outside_Validator_Should_Throw_Exception(string input)
+    {
+        Plateau plateau = new Plateau(5, 5);
+        var ex = Assert.Throws<ArgumentException>(() => validator.ValidateInitialPosition(input, plateau));
+        Assert.That(ex.Message, Is.EqualTo("Rover can not be placed outside the Plateau dimension."));
+    }
 }
