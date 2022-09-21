@@ -1,10 +1,11 @@
 using NUnit.Framework;
 using FluentAssertions;
 using MarsRover.Model;
+using MarsRover.Validator;
 
 namespace MarsRoverTests;
 
-public class Tests
+public class MarsRoverTest
 {
     private Plateau plateau1;
     private Rover rover1;
@@ -183,7 +184,7 @@ public class Tests
     [TestCase("-1 2 N")]
     [TestCase("1 -2 E")]
     [TestCase("1 2 P")]
-    public void When_A_Rover_Is_Placed_On_A_Plateau_An_Exception_Is_Thrown(string input)
+    public void When_A_Rover_Is_Added_By_Mission_Control_With_Invalid_Position_An_Exception_Is_Thrown(string input)
     {
         MissionControl missionControl1 = new MissionControl();
         missionControl1.AddPlateau("5 5");

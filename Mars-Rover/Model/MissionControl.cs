@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using MarsRover.Validator;
 
 namespace MarsRover.Model
 {
@@ -14,9 +15,11 @@ namespace MarsRover.Model
         private int minimumLowerBoundary = 0;
         private const string directionRegEx = "N|E|S|W";
         private const string movementRegEx = "^[LRM]*$";
+        private MarsRoverValidator validator;
 
         public MissionControl()
         {
+            validator = new MarsRoverValidator();
         }
 
         public void AddPlateau(string input)
@@ -32,15 +35,11 @@ namespace MarsRover.Model
         public void AddRover(string input)
         {
             var roverPosition = input.Trim().Split(" ");
-            if (plateau == null)
+            if (plateau is null)
             {
                 throw new NullReferenceException("Rover can not be created without a plateau.");
             }
-            if (Convert.ToInt32(roverPosition[0]) < minimumLowerBoundary || Convert.ToInt32(roverPosition[1]) < minimumLowerBoundary ||
-                !Regex.IsMatch(roverPosition[2].ToString(), directionRegEx))
-            {
-                throw new ArgumentException("Position can not have negative values or invalid direction.");
-            }
+            validator.ValidatePosition(input);
             if (Convert.ToInt32(roverPosition[0]) > plateau.Width || Convert.ToInt32(roverPosition[1]) > plateau.Height)
             {
                 throw new ArgumentException("Rover can not be placed outside the Plateau dimension.");
