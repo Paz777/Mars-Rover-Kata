@@ -37,12 +37,12 @@ namespace MarsRover.Model
                 Convert.ToInt32(roverPosition[1]), Convert.ToChar(roverPosition[2])));
         }
 
-        public void MoveRover(string movement)
+        public void MoveRover(string moveInstructions)
         {
-            validator.ValidateMoveInstructions(movement);
+            validator.ValidateMoveInstructions(moveInstructions);
 
-            char[] moveInstructions = movement.ToCharArray();
-            foreach (char move in moveInstructions)
+            char[] instructions = moveInstructions.ToCharArray();
+            foreach (char move in instructions)
             {
                 if (move == 'L')
                 {
