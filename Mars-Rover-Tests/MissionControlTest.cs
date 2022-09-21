@@ -2,6 +2,7 @@ using NUnit.Framework;
 using FluentAssertions;
 using MarsRover.Model;
 using MarsRover.Validator;
+using MarsRover.Exceptions;
 
 namespace MarsRoverTests;
 
@@ -33,7 +34,7 @@ public class MissionControlTest
     [TestCase("3 -1")]
     public void Given_An_Invalid_String_Input_For_Plateau_It_Should_Throw_An_Exception(string input)
     {
-        var ex = Assert.Throws<ArgumentException>(() => missionControl1.AddPlateau(input));
+        var ex = Assert.Throws<PlateauException>(() => missionControl1.AddPlateau(input));
         Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with negative values."));
     }
 
@@ -62,7 +63,7 @@ public class MissionControlTest
     public void When_A_Rover_Is_Added_With_Invalid_Position_It_Should_Throw_An_Exception(string input)
     {
         missionControl1.AddPlateau("5 5");
-        var ex = Assert.Throws<ArgumentException>(() => missionControl1.AddRover(input));
+        var ex = Assert.Throws<PositionException>(() => missionControl1.AddRover(input));
         Assert.That(ex.Message, Is.EqualTo("Position can not have negative values or invalid direction."));
     }
 
@@ -72,7 +73,7 @@ public class MissionControlTest
     public void When_A_Rover_Is_Positioned_Outside_The_Plateau_It_Should_Throw_An_Exception(string input)
     {
         missionControl1.AddPlateau("5 5");
-        var ex = Assert.Throws<ArgumentException>(() => missionControl1.AddRover(input));
+        var ex = Assert.Throws<PositionException>(() => missionControl1.AddRover(input));
         Assert.That(ex.Message, Is.EqualTo("Rover can not be placed outside the Plateau dimension."));
     }
 
@@ -94,7 +95,7 @@ public class MissionControlTest
     {
         missionControl1.AddPlateau("5 5");
         missionControl1.AddRover("3 3 E");
-        var ex = Assert.Throws<ArgumentException>(() => missionControl1.MoveRover("MMRMMPRMRRM"));
+        var ex = Assert.Throws<MoveException>(() => missionControl1.MoveRover("MMRMMPRMRRM"));
         Assert.That(ex.Message, Is.EqualTo("Not a valid movement move aborted."));
     }
 

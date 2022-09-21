@@ -12,10 +12,12 @@
     <None Remove="Model\" />
     <None Remove="Validator\" />
     <None Remove="Interface\" />
+    <None Remove="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Validator\" />
     <Folder Include="Interface\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>

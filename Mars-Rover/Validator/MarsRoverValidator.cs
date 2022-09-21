@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using MarsRover.Exceptions;
 using MarsRover.Model;
 
 namespace MarsRover.Validator
@@ -20,7 +21,7 @@ namespace MarsRover.Validator
             if (Convert.ToInt32(roverPosition[0]) < minimumLowerBoundary || Convert.ToInt32(roverPosition[1]) < minimumLowerBoundary ||
                 !Regex.IsMatch(roverPosition[2].ToString(), directionRegEx))
             {
-                throw new ArgumentException("Position can not have negative values or invalid direction.");
+                throw new PositionException("Position can not have negative values or invalid direction.");
             }
         }
 
@@ -29,7 +30,7 @@ namespace MarsRover.Validator
             var plateauDimensions = Array.ConvertAll(plateauInput.Trim().Split(" "), x => Convert.ToInt32(x));
             if (plateauDimensions[0] < minimumLowerBoundary || plateauDimensions[1] < minimumLowerBoundary)
             {
-                throw new ArgumentException("Plateau can not be created with negative values.");
+                throw new PlateauException("Plateau can not be created with negative values.");
             }
         }
 
@@ -43,7 +44,7 @@ namespace MarsRover.Validator
             var roverPosition = positionInput.Trim().Split(" ");
             if (Convert.ToInt32(roverPosition[0]) > plateau.Width || Convert.ToInt32(roverPosition[1]) > plateau.Height)
             {
-                throw new ArgumentException("Rover can not be placed outside the Plateau dimension.");
+                throw new PositionException("Rover can not be placed outside the Plateau dimension.");
             }
         }
 
@@ -51,7 +52,7 @@ namespace MarsRover.Validator
         {
             if (!Regex.IsMatch(moveInstructions, movementRegEx))
             {
-                throw new ArgumentException("Not a valid movement move aborted.");
+                throw new MoveException("Not a valid movement move aborted.");
             }
         }
     }
