@@ -5,18 +5,13 @@ namespace MarsRover.Model
     {
         public Position CurrentPosition { get; private set; }
 
-        public Rover()
-        {
-        }
-
-        public void PlaceRoverOnPlateau(Position position)
+        public Rover(Position position)
         {
             CurrentPosition = position;
         }
 
         public void SpinRight()
         {
-            CheckPositionIsNull();
             CurrentPosition.Direction = CurrentPosition.Direction switch
             {
                 'N' => 'E',
@@ -28,7 +23,6 @@ namespace MarsRover.Model
 
         public void SpinLeft()
         {
-            CheckPositionIsNull();
             CurrentPosition.Direction = CurrentPosition.Direction switch
             {
                 'N' => 'W',
@@ -40,7 +34,6 @@ namespace MarsRover.Model
 
         public void Move()
         {
-            CheckPositionIsNull();
             var what_is_this_variable_for = CurrentPosition.Direction switch
             {
                 'N' => CurrentPosition.YPosition += 1,
@@ -48,14 +41,6 @@ namespace MarsRover.Model
                 'S' => CurrentPosition.YPosition -= 1,
                 'W' => CurrentPosition.XPosition -= 1
             };
-        }
-
-        private void CheckPositionIsNull()
-        {
-            if (CurrentPosition is null)
-            {
-                throw new NullReferenceException("Rover has not been placed on the Plateau.");
-            }
         }
     }
 }

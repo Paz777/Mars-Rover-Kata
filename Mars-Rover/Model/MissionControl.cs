@@ -32,6 +32,10 @@ namespace MarsRover.Model
         public void AddRover(string input)
         {
             var roverPosition = input.Trim().Split(" ");
+            if (plateau == null)
+            {
+                throw new NullReferenceException("Rover can not be created without a plateau.");
+            }
             if (Convert.ToInt32(roverPosition[0]) < minimumLowerBoundary || Convert.ToInt32(roverPosition[1]) < minimumLowerBoundary ||
                 !Regex.IsMatch(roverPosition[2].ToString(), directionRegEx))
             {
@@ -41,8 +45,7 @@ namespace MarsRover.Model
             {
                 throw new ArgumentException("Rover can not be placed outside the Plateau dimension.");
             }
-            rover = new Rover();
-            rover.PlaceRoverOnPlateau(new Position(Convert.ToInt32(roverPosition[0]),
+            rover = new Rover(new Position(Convert.ToInt32(roverPosition[0]),
                 Convert.ToInt32(roverPosition[1]), Convert.ToChar(roverPosition[2])));
         }
 
