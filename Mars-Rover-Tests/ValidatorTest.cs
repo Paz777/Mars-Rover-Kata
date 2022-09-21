@@ -34,10 +34,21 @@ public class ValidatorTest
     [TestCase("6 5 N")]
     [TestCase("5 6 E")]
     [TestCase("6 6 W")]
-    public void Given_A_String_Input_For_A_Rover_Which_Is_Outside_Validator_Should_Throw_Exception(string input)
+    public void Given_A_String_Input_For_A_Rover_Which_Is_Outside_Validator_Should_Throw_Exception(string roverPositionInput)
     {
         Plateau plateau = new Plateau(5, 5);
-        var ex = Assert.Throws<ArgumentException>(() => validator.ValidateInitialPosition(input, plateau));
+        var ex = Assert.Throws<ArgumentException>(() => validator.ValidateInitialPosition(roverPositionInput, plateau));
         Assert.That(ex.Message, Is.EqualTo("Rover can not be placed outside the Plateau dimension."));
+    }
+
+    [TestCase("MMRMMPPPPRMRRM")]
+    [TestCase("MMRMMPRMRRM")]
+    [TestCase("MMRblahblahRM")]
+    [TestCase("MMR123RM")]
+    [TestCase("MMRrmlmlrRM")]
+    public void Given_A_String_Input_For_An_Invalid_Move_Instruction_Validator_Should_Throw_Exception(string moveInstructions)
+    {
+        var ex = Assert.Throws<ArgumentException>(() => validator.ValidateMoveInstructions(moveInstructions));
+        Assert.That(ex.Message, Is.EqualTo("Not a valid movement move aborted."));
     }
 }

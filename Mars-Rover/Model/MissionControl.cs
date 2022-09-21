@@ -12,7 +12,6 @@ namespace MarsRover.Model
 
         private Plateau plateau;
         private Rover rover;
-        private const string movementRegEx = "^[LRM]*$";
         private MarsRoverValidator validator;
 
         public MissionControl()
@@ -40,10 +39,8 @@ namespace MarsRover.Model
 
         public void MoveRover(string movement)
         {
-            if (!Regex.IsMatch(movement, movementRegEx))
-            {
-                throw new ArgumentException("Not a valid movement move aborted.");
-            }
+            validator.ValidateMoveInstructions(movement);
+
             char[] moveInstructions = movement.ToCharArray();
             foreach (char move in moveInstructions)
             {

@@ -8,6 +8,7 @@ namespace MarsRover.Validator
     {
         private int minimumLowerBoundary = 0;
         private const string directionRegEx = "N|E|S|W";
+        private const string movementRegEx = "^[LRM]*$";
 
         public MarsRoverValidator()
         {
@@ -43,6 +44,14 @@ namespace MarsRover.Validator
             if (Convert.ToInt32(roverPosition[0]) > plateau.Width || Convert.ToInt32(roverPosition[1]) > plateau.Height)
             {
                 throw new ArgumentException("Rover can not be placed outside the Plateau dimension.");
+            }
+        }
+
+        public void ValidateMoveInstructions(string moveInstructions)
+        {
+            if (!Regex.IsMatch(moveInstructions, movementRegEx))
+            {
+                throw new ArgumentException("Not a valid movement move aborted.");
             }
         }
     }
