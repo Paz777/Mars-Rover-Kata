@@ -11,9 +11,11 @@
   <ItemGroup>
     <None Remove="Model\" />
     <None Remove="Validator\" />
+    <None Remove="Interface\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Validator\" />
+    <Folder Include="Interface\" />
   </ItemGroup>
 </Project>

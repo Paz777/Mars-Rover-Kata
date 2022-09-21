@@ -1,16 +1,16 @@
 ﻿using System;
 namespace MarsRover.Model
 {
-    public class Rover
+    public class Rover : Vehicle
     {
-        public Position CurrentPosition { get; private set; }
+        public new Position CurrentPosition { get; private set; }
 
         public Rover(Position position)
         {
             CurrentPosition = position;
         }
 
-        public void SpinRight()
+        public override void SpinRight()
         {
             CurrentPosition.Direction = CurrentPosition.Direction switch
             {
@@ -21,7 +21,7 @@ namespace MarsRover.Model
             };
         }
 
-        public void SpinLeft()
+        public override void SpinLeft()
         {
             CurrentPosition.Direction = CurrentPosition.Direction switch
             {
@@ -32,7 +32,7 @@ namespace MarsRover.Model
             };
         }
 
-        public void Move()
+        public override void Move()
         {
             var what_is_this_variable_for = CurrentPosition.Direction switch
             {
