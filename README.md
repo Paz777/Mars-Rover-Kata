@@ -16,17 +16,17 @@ To move a Rover around the Plateau, a string of letters is sent to a Rover.
 
 Here are the letters and their resultant action:
  
-L - Spins the Rover 90 degrees Left without moving from the current  coordinate point/
-R - Spins the Rover 90 degrees Right without moving from the current  coordinate point/
+L - Spins the Rover 90 degrees Left without moving from the current  coordinate point
+R - Spins the Rover 90 degrees Right without moving from the current  coordinate point
 M - Moves the Rover forward by one grid point, maintaining the same  heading (i.e. from where the Rover is facing (its orientation)). Assume that the square directly North from (x, y) is (x, y+1).
 
 Inputs into the program are given by string.
 
-A move instruction "LMLMLMLMM" would move a rover at position "1 2 N" to position "1 3 N" 
+A move instruction "LMLMLMLMM" would move a rover at position "1 2 N" to position "1 3 N".
 
 ## Project Setup
 
-The solution has 2 projects. The main implementation is split into model, interface, exception and validator. The test project has been split into mission control tests, rover tests and validator tests.
+The solution has 2 projects. The main implementation is seperated into model, interface, exception and validator. The test project has been split into mission control tests, rover tests and validator tests.
 
 The Mission Control class takes the input as a string and allows a Plateau and Rovers to be added. It takes instructions and moves the Rovers around the Plateau.
 
@@ -59,8 +59,8 @@ Plateau's that need to be different shapes rather than a square can be done by h
 
 As an extension to the project I'm looking to develop this into the Mars Rover Hunger Games.
 
-The BattleRover would extend Rover and will be able to Dig for Mars Rocks, throw Mars Rocks to a specific position, land hits on other Rovers, limit the no of move instructions, pick up Items found on the Plateau. 
-The Plateau can have hidden Items such as Super Sensors. When a Rover uses the Super Sensor it can get back information based on a certain radius, of what positions Items, Rovers and other Vechicles are at.
+The BattleRover would extend Rover and will be able to Dig for Mars Rocks, throw Mars Rocks to a specific position, land hits on other Rovers, limit the no of move instructions, pick up Items found on the Plateau.
+The Plateau can have hidden Items such as Super Sensors. When a Rover uses the Super Sensor it can get back information based on a certain radius, of what positions Items, Rovers and other Vehicles are at.
 Rovers would need to be placed at a random position.
 
 
