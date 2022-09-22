@@ -16,9 +16,9 @@ To move a Rover around the Plateau, a string of letters is sent to a Rover.
 
 Here are the letters and their resultant action:
  
-L - Spins the Rover 90 degrees Left without moving from the current  coordinate point
-R - Spins the Rover 90 degrees Right without moving from the current  coordinate point
-M - Moves the Rover forward by one grid point, maintaining the same  heading (i.e. from where the Rover is facing (its orientation)). Assume that the square directly North from (x, y) is (x, y+1).
+* L - Spins the Rover 90 degrees Left without moving from the current  coordinate point
+* R - Spins the Rover 90 degrees Right without moving from the current  coordinate point
+* M - Moves the Rover forward by one grid point, maintaining the same  heading (i.e. from where the Rover is facing (its orientation)). Assume that the square directly North from (x, y) is (x, y+1).
 
 Inputs into the program are given by string.
 
@@ -38,30 +38,30 @@ The project allowed me to develop my TDD skills using AAA (Arrange, Act and Asse
 
 Consideration for validation has been taken into account such as:
 
-Position and Plateau can not be negative.
-Can not do anything with a Rover if it is not on the Plateau.
-Rover can not be placed outside the Plateau.
-If the move instructions given to a Rover results in the Position being outside the Plateau the move is aborted.
+* Position and Plateau can not be negative.
+* Can not do anything with a Rover if it is not on the Plateau.
+* Rover can not be placed outside the Plateau.
+* If the move instructions given to a Rover results in the Position being outside the Plateau the move is aborted.
 
 Exceptions implemented
 
-PositionException
-MoveException
-PlateauException
+* PositionException
+* MoveException
+* PlateauException
 
 ## Updates
 
-More validations for simple tests such as null, incorrect string format still need to be completed.
-Though Rovers returned from Mission Control is readonly it can be modified from outside the class. Accessors needs to be correctly implemented.
-Plateau's that need to be different shapes rather than a square can be done by holding a list of points and calculating the shape of the Plateau accordingly.
+* More validations for simple tests such as null, incorrect string format still need to be completed.
+* Though Rovers returned from Mission Control is readonly it can be modified from outside the class. Accessors needs to be correctly implemented.
+* Plateau's that need to be different shapes rather than a square can be done by holding a list of points and calculating the shape of the Plateau accordingly.
 
 ## Future Development
 
 As an extension to the project I'm looking to develop this into the Mars Rover Hunger Games.
 
-The BattleRover would extend Rover and will be able to Dig for Mars Rocks, throw Mars Rocks to a specific position, land hits on other Rovers, limit the no of move instructions, pick up Items found on the Plateau.
-The Plateau can have hidden Items such as Super Sensors. When a Rover uses the Super Sensor it can get back information based on a certain radius, of what positions Items, Rovers and other Vehicles are at.
-Rovers would need to be placed at a random position.
+* The BattleRover would extend Rover and will be able to Dig for Mars Rocks, throw Mars Rocks to a specific position, land hits on other Rovers, limit the no of move instructions, pick up Items found on the Plateau.
+* The Plateau can have hidden Items such as Super Sensors. When a Rover uses the Super Sensor it can get back information based on a certain radius, of what positions Items, Rovers and other Vehicles are at.
+* Rovers would need to be placed at a random position.
 
 
 
