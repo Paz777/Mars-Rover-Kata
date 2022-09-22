@@ -54,7 +54,7 @@ public class MissionControlTest
     public void Given_A_Rover_Without_A_Plateau_It_Should_Throw_An_Exception()
     {
         var ex = Assert.Throws<NullReferenceException>(() => missionControl1.AddRover("1 2 N"));
-        Assert.That(ex.Message, Is.EqualTo("Rover can not be created without a plateau."));
+        Assert.That(ex.Message, Is.EqualTo("Rover can not be created without a Plateau."));
     }
 
     [TestCase("-1 2 N")]
@@ -96,7 +96,7 @@ public class MissionControlTest
         missionControl1.AddPlateau("5 5");
         missionControl1.AddRover("3 3 E");
         var ex = Assert.Throws<MoveException>(() => missionControl1.MoveRover("MMRMMPRMRRM"));
-        Assert.That(ex.Message, Is.EqualTo("Not a valid movement move aborted."));
+        Assert.That(ex.Message, Is.EqualTo("Not a valid movement - move aborted."));
     }
 
     [Test]
@@ -131,6 +131,32 @@ public class MissionControlTest
         }
         missionControl1.GetRoverPosition.XPosition.Should().Be(1);
         missionControl1.GetRoverPosition.YPosition.Should().Be(3);
+        missionControl1.GetRoverPosition.Direction.Should().Be('N');
+    }
+
+    [Test]
+    public void Given_A_Rover_With_Move_Instructions_That_Is_Outside_Of_Plateau_It_Should_Throw_An_Exception()
+    {
+        missionControl1.AddPlateau("5 5");
+        missionControl1.AddRover("5 5 N");
+        var ex = Assert.Throws<MoveException>(() => missionControl1.MoveRover("MM"));
+        Assert.That(ex.Message, Is.EqualTo("Move instructions takes Rover outside of Plateau - move aborted."));
+    }
+
+    [Test]
+    public void Given_A_Rover_With_Move_Instructions_That_Is_Outside_Of_Plateau_It_Should_Remain_In_Correct_Position()
+    {
+        missionControl1.AddPlateau("5 5");
+        missionControl1.AddRover("5 5 N");
+        try
+        {
+            missionControl1.MoveRover("MM");
+        }
+        catch (Exception ex)
+        {
+        }
+        missionControl1.GetRoverPosition.XPosition.Should().Be(5);
+        missionControl1.GetRoverPosition.YPosition.Should().Be(5);
         missionControl1.GetRoverPosition.Direction.Should().Be('N');
     }
 }

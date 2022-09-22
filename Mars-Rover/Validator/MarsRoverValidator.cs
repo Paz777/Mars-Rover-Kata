@@ -38,7 +38,7 @@ namespace MarsRover.Validator
         {
             if (plateau is null)
             {
-                throw new NullReferenceException("Rover can not be created without a plateau.");
+                throw new NullReferenceException("Rover can not be created without a Plateau.");
             }
 
             var roverPosition = positionInput.Trim().Split(" ");
@@ -52,7 +52,15 @@ namespace MarsRover.Validator
         {
             if (!Regex.IsMatch(moveInstructions, movementRegEx))
             {
-                throw new MoveException("Not a valid movement move aborted.");
+                throw new MoveException("Not a valid movement - move aborted.");
+            }
+        }
+
+        public void ValidateMovePosition(Rover rover, Plateau plateau)
+        {
+            if (rover.CurrentPosition.XPosition > plateau.Width || rover.CurrentPosition.YPosition > plateau.Height)
+            {
+                throw new MoveException("Move instructions takes Rover outside of Plateau - move aborted.");
             }
         }
     }

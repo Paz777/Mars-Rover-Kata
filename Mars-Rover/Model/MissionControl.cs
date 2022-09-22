@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using MarsRover.Exceptions;
 using MarsRover.Validator;
 
 namespace MarsRover.Model
@@ -41,6 +42,9 @@ namespace MarsRover.Model
         {
             validator.ValidateMoveInstructions(moveInstructions);
 
+            Position positionBeforeMove = new Position(rover.CurrentPosition.XPosition, rover.CurrentPosition.YPosition,
+                rover.CurrentPosition.Direction);
+
             char[] instructions = moveInstructions.ToCharArray();
             foreach (char move in instructions)
             {
@@ -56,6 +60,16 @@ namespace MarsRover.Model
                 {
                     rover.Move();
                 }
+            }
+
+            try
+            {
+                validator.ValidateMovePosition(rover, plateau);
+            }
+            catch (MoveException ex)
+            {
+                this.rover.CurrentPosition = positionBeforeMove;
+                throw ex;
             }
         }
     }

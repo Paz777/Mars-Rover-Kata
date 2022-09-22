@@ -51,6 +51,16 @@ public class ValidatorTest
     public void Given_A_String_Input_For_An_Invalid_Move_Instruction_Validator_Should_Throw_Exception(string moveInstructions)
     {
         var ex = Assert.Throws<MoveException>(() => validator.ValidateMoveInstructions(moveInstructions));
-        Assert.That(ex.Message, Is.EqualTo("Not a valid movement move aborted."));
+        Assert.That(ex.Message, Is.EqualTo("Not a valid movement - move aborted."));
+    }
+
+    [TestCase("MM")]
+    public void Given_A_String_Input_For_Move_Instruction_That_Takes_Rover_Outside_Of_Plateau_Validator_Should_Throw_Exception(string moveInstructions)
+    {
+        Plateau plateau = new Plateau(5, 5);
+        Rover rover = new Rover(new Position(5,5,'N'));
+        rover.Move();
+        var ex = Assert.Throws<MoveException>(() => validator.ValidateMovePosition(rover, plateau));
+        Assert.That(ex.Message, Is.EqualTo("Move instructions takes Rover outside of Plateau - move aborted."));
     }
 }

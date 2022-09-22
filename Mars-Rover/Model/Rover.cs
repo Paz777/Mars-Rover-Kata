@@ -3,8 +3,6 @@ namespace MarsRover.Model
 {
     public class Rover : Vehicle
     {
-        public new Position CurrentPosition { get; private set; }
-
         public Rover(Position position)
         {
             CurrentPosition = position;
