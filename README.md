@@ -51,9 +51,8 @@ Exceptions implemented
 
 ## Updates
 
-* More validations for simple tests such as null, incorrect string format still need to be completed.
-* Though Rovers returned from Mission Control is readonly it can be modified from outside the class. Accessors needs to be correctly implemented.
-* Plateau's that need to be different shapes rather than a square can be done by holding a list of points and calculating the shape of the Plateau accordingly.
+* Though Rovers returned from Mission Control is readonly it can be modified from outside the class. Access needs to be correctly implemented. This. Can be done by making it immutable.
+* Plateau's that need to be different shapes rather than a square can be done by having each shape be its own shaped plateau class and performs its own calculation. Introducing an interface which has a calculate area would be beneficial.
 
 ## Future Development
 

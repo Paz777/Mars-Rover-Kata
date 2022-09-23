@@ -38,6 +38,19 @@ public class MissionControlTest
         Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with negative values."));
     }
 
+    [Test]
+    public void Given_An_Empty_String_or_Null_Input_For_Plateau_It_Should_Throw_An_Exception()
+    {
+        var ex = Assert.Throws<PlateauException>(() => missionControl1.AddPlateau(""));
+        Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with invalid input."));
+
+        ex = Assert.Throws<PlateauException>(() => missionControl1.AddPlateau(string.Empty));
+        Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with invalid input."));
+
+        ex = Assert.Throws<PlateauException>(() => missionControl1.AddPlateau(null));
+        Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with invalid input."));
+    }
+
     [TestCase("1 2 N", 1, 2, 'N')]
     [TestCase("2 4 E", 2, 4, 'E')]
     [TestCase(" 3 3 W ", 3, 3, 'W')]

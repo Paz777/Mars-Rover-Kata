@@ -27,7 +27,16 @@ namespace MarsRover.Validator
 
         public void ValidatePlateau(string plateauInput)
         {
-            var plateauDimensions = Array.ConvertAll(plateauInput.Trim().Split(" "), x => Convert.ToInt32(x));
+            int [] plateauDimensions;
+            try
+            {
+                plateauDimensions = Array.ConvertAll(plateauInput.Trim().Split(" "), x => Convert.ToInt32(x));
+            }
+            catch (Exception ex)
+            {
+                throw new PlateauException("Plateau can not be created with invalid input.");
+            }
+            
             if (plateauDimensions[0] < minimumLowerBoundary || plateauDimensions[1] < minimumLowerBoundary)
             {
                 throw new PlateauException("Plateau can not be created with negative values.");

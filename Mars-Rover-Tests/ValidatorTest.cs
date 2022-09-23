@@ -33,6 +33,19 @@ public class ValidatorTest
         Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with negative values."));
     }
 
+    [Test]
+    public void Given_An_Empty_String_Or_Null_Input_For_Plateau_Validator_Should_Throw_Exception()
+    {
+        var ex = Assert.Throws<PlateauException>(() => validator.ValidatePlateau(""));
+        Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with invalid input."));
+
+        ex = Assert.Throws<PlateauException>(() => validator.ValidatePlateau(String.Empty));
+        Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with invalid input."));
+
+        ex = Assert.Throws<PlateauException>(() => validator.ValidatePlateau(null));
+        Assert.That(ex.Message, Is.EqualTo("Plateau can not be created with invalid input."));
+    }
+
     [TestCase("6 5 N")]
     [TestCase("5 6 E")]
     [TestCase("6 6 W")]
