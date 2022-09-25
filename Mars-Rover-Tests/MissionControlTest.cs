@@ -3,6 +3,7 @@ using FluentAssertions;
 using MarsRover.Model;
 using MarsRover.Validator;
 using MarsRover.Exceptions;
+using System.Collections.ObjectModel;
 
 namespace MarsRoverTests;
 
@@ -174,15 +175,14 @@ public class MissionControlTest
     }
 
     [Test]
-    public void Given_2_Rovers_Mission_Control_Should_Take_Instructions_And_Move_Them_To_Correct_Positions()
+    public void Given_Two_Rovers_Mission_Control_Should_Take_Instructions_And_Move_Them_To_Correct_Positions()
     {
         missionControl1.AddPlateau("5 5");
         missionControl1.AddRover("1 2 N");
         missionControl1.MoveRover("LMLMLMLMM");
         missionControl1.AddRover("3 3 E");
         missionControl1.MoveRover("MMRMMRMRRM");
-        List<Rover> rovers = new List<Rover> { };
-        rovers = missionControl1.GetRovers().ToList<Rover>();
+        ReadOnlyCollection<Rover> rovers = missionControl1.GetRovers();
 
         rovers[0].CurrentPosition.XPosition.Should().Be(1);
         rovers[0].CurrentPosition.YPosition.Should().Be(3);

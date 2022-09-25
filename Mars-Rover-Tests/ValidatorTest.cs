@@ -3,6 +3,7 @@ using FluentAssertions;
 using MarsRover.Model;
 using MarsRover.Validator;
 using MarsRover.Exceptions;
+using MarsRover.Interface;
 
 namespace ValidatorTests;
 
@@ -75,5 +76,19 @@ public class ValidatorTest
         rover.Move();
         var ex = Assert.Throws<MoveException>(() => validator.ValidateMovePosition(rover, plateau));
         Assert.That(ex.Message, Is.EqualTo("Move instructions takes Rover outside of Plateau - move aborted."));
+    }
+
+    [Test]
+    public void Given_Two_Rovers_And_The_Second_Rover_Collides_With_The_First_Throw_Execption()
+    {
+        MarsRoverValidator marsRoverValidator1 = new MarsRoverValidator();
+        BattleRover rover1 = new BattleRover("Player1", new Position(3, 3, 'N'));
+        BattleRover rover2 = new BattleRover("Player2", new Position(3, 3, 'N'));
+        Dictionary<string, BattleRover> rovers = new Dictionary<string, BattleRover>();
+        rovers.Add(rover1.Name, rover1);
+        rovers.Add(rover2.Name, rover2);
+
+        var ex = Assert.Throws<MoveException>(() => marsRoverValidator1.ValidateMovePositionForCollision(rover2, rovers));
+        Assert.That(ex.Message, Is.EqualTo("Move collides with another Rover at Position 3 3 - move aborted"));
     }
 }

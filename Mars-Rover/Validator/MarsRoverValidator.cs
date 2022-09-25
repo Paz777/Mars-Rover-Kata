@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using MarsRover.Exceptions;
 using MarsRover.Model;
 
@@ -70,6 +69,22 @@ namespace MarsRover.Validator
             if (rover.CurrentPosition.XPosition > plateau.Width || rover.CurrentPosition.YPosition > plateau.Height)
             {
                 throw new MoveException("Move instructions takes Rover outside of Plateau - move aborted.");
+            }
+        }
+
+        public void ValidateMovePositionForCollision(BattleRover currentRover, Dictionary<string, BattleRover> rovers)
+        {
+            foreach (BattleRover rover in rovers.Values)
+            {
+                if (currentRover.Name != rover.Name)
+                {
+                    if (currentRover.CurrentPosition.XPosition == rover.CurrentPosition.XPosition &&
+                        currentRover.CurrentPosition.YPosition == rover.CurrentPosition.YPosition)
+                    {
+                        throw new MoveException($"Move collides with another Rover at Position {currentRover.CurrentPosition.XPosition} " +
+                            $"{currentRover.CurrentPosition.XPosition} - move aborted");
+                    }
+                }
             }
         }
     }

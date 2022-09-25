@@ -1,5 +1,4 @@
-﻿using System;
-namespace MarsRover.Model
+﻿namespace MarsRover.Model
 {
     public class Rover : Vehicle
     {

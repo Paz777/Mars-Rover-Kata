@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
-
-namespace MarsRover.Model
+﻿namespace MarsRover.Model
 {
     public class Position
     {
