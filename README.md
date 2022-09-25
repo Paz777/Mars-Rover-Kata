@@ -4,7 +4,7 @@
 
 As part of the Tech Returners training programme, I am learning and utilising the skills of Test Driven Development and C# for the Mars Rover Kata. Currently there is a test coverage of over 50 tests.
 
-The extension of this project - Mars Rover Hunger Games - is being used to help my peers to learn and develop their pair programming and TDD knowledge.
+The extension of this project - Mars Rover Hunger Games - is being used to help my peers to learn and develop their pair programming and TDD knowledge and experience.
 
 ## Setting the Scene
 
@@ -53,7 +53,7 @@ Exceptions implemented
 
 * Though Rovers returned from Mission Control is readonly it can be modified from outside the class. Access needs to be correctly implemented. This can be done by making objects immutable and then recreating the object with the new position.
 * Position class can also be split into co-ordinates and direction.
-* Plateau's that need to be different shapes rather than a square can be done by having each shape be its own shaped plateau class and each class then performs its own calculation. Introducing an interface which has to calculate the plateau would then be beneficial.
+* Plateau's that need to be different shapes rather than a square can be done by having each shape be its own shaped plateau class and each class then performs its own calculation. Introducing an interface and where each each has to calculate the plateau would then be beneficial.
 * Creating enums for directions and moves.
 
 ## Future Development
@@ -66,7 +66,7 @@ As an extension to the project I'm looking to develop this into the Mars Rover H
 * Implement a web based interface.
 
 
-Currently we are developing this but have found that for each move the rover makes it has to check for collision and this seems like a lot of operations and a better model needs to be introduced but we can still use this for learning TDD and problem solving.
+Currently we are developing this but have found that for each move the rover makes it has to check for collision and this seems like a lot of operations and a better model needs to be introduced but we can still use this extension project for learning TDD and problem solving.
 
 If you would like to contribute to the extension of this project and can help us to develop our TDD and pair programming skills we would love to hear from you.
 
